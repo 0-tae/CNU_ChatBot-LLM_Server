@@ -1,0 +1,8 @@
+__pycache.venv
+credentials.json
+*token.json
+tokens
+config
+__pycache__/
+*.py[cod]
+Dockerfile
