@@ -5,8 +5,8 @@ class LLMObject():
     def __init__(self):
         # Model Initialize
         util.debug_message("Waiting for Llama-2 instance..")
-        instance = Ollama(model="llama2")
-        instance("hi")
+        self.instance = Ollama(model="llama2")
+        self.instance("hi")
 
     def get_result(self,user_input):
         # LLM으로 질의 후 응답받기
