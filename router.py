@@ -23,7 +23,7 @@ def result_for_query(query_dto: QueryDTO):
     #  TODO: Header 확인하여 접근권한을 가진 요청인지 확인하기
 
     # 질의를 통해 LLM에서 결과 얻어오기
-    answer = execute_func_with_exception_handler(llm_obejct.get_result(query_dto.query_message))
+    answer = execute_func_with_exception_handler(llm_obejct.get_result,query_dto.query_message)
 
     return HttpResponse(ok = True, body = {"answer_message":answer}, status_code = 200, message = "success")
 
