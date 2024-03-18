@@ -21,4 +21,4 @@ class HttpErrorResponse(HttpBaseResponse):
     message: str = "unexpected error"
 
 class QueryDTO(BaseModel):
-    user_input: str
+    query_message: str
