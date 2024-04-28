@@ -1,8 +1,13 @@
 __pycache.venv
 credentials.json
+credential.json
 *token.json
 tokens
 config
 __pycache__/
 *.py[cod]
 Dockerfile
+*.csv
+chroma
+.ipynb*
+archive

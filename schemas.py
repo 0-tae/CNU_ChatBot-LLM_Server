@@ -22,3 +22,6 @@ class HttpErrorResponse(HttpBaseResponse):
 
 class QueryDTO(BaseModel):
     query_message: str
+
+class ResponseQueryDTO(BaseModel):
+    ans_message: str
