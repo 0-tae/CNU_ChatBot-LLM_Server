@@ -3,7 +3,7 @@ import chromadb, ollama, json
 from tqdm import tqdm
 from datetime import datetime
 from bs4 import BeautifulSoup
-
+from chromadb.utils import embedding_functions
 
 def getSecondsDiff(start,end):
     time_dif = end - start
@@ -54,6 +54,8 @@ metadatas = []
 embeddings = []
 documents = []
 
+openai_ef = embedding_functions.SentenceTransformerEmbeddingFunction()
+
 # CSV 데이터 순회 후 vector DB에 저장
 for idx, row in enumerate(csv_data.iterrows()):
   start_time = datetime.now()
@@ -75,11 +77,9 @@ for idx, row in enumerate(csv_data.iterrows()):
   documents.append(document)
 
   # embedding
-  response = ollama.embeddings(model="mxbai-embed-large", prompt=json.dumps(metadata))
-  embedding = response["embedding"]
-  embeddings.append(embedding)
-
-  #########################
+    #   response = ollama.embeddings(model="mxbai-embed-large", prompt=json.dumps(metadata))
+    #   embedding = response["embedding"]
+    # embeddings.append(embedding)
 
   # time set
   end_time = datetime.now()
@@ -87,10 +87,11 @@ for idx, row in enumerate(csv_data.iterrows()):
   print(f"[debug] ({idx} / {entire_size})")
   
   if idx % 100 == 0 :
-    # Collection ADD
+
+    # Collection add
     collection.add(
         ids=ids,
-        # embeddings=embeddings,
+        embeddings=openai_ef(documents),
         metadatas=metadatas,
         documents=documents
     )
@@ -101,8 +102,6 @@ for idx, row in enumerate(csv_data.iterrows()):
     documents = []
 
     print("[debug] data added",end_time.strftime("%Y-%m-%d %H:%M:%S"),getTimeDiffString(prediction_seconds))
-    break
-       
 
 # Collection ADD
 collection.add(
