@@ -40,18 +40,22 @@ print("Complete") # progress
 entire_size, num_cols = csv_data.shape
 
 # 디스크 모드로 이용, 이외에도 인메모리, HttpClient 방식 등이 존재
+import chromadb.utils.embedding_functions as embedding_functions
+huggingface_ef = embedding_functions.HuggingFaceEmbeddingFunction(
+    api_key="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",
+    model_name="snunlp/KR-SBERT-V40K-klueNLI-augSTS"
+)
 
 COLLECTION_NAME = "cnu_article_data"
 
 print(f"[debug] Get Vector DB Client name : {COLLECTION_NAME}..", end=" ") # progress
 client = chromadb.PersistentClient()
-collection = client.get_or_create_collection(name=COLLECTION_NAME)
+collection = client.get_or_create_collection(name=COLLECTION_NAME, embedding_function = huggingface_ef)
 print("Complete") # progress
 
 # site_name,article_number,article_title,article_text,writer_name,click_count,update_date
 ids = []
 metadatas = []
-embeddings = []
 documents = []
 
 openai_ef = embedding_functions.SentenceTransformerEmbeddingFunction()
@@ -73,7 +77,7 @@ for idx, row in enumerate(csv_data.iterrows()):
   ids.append(str(idx))
   
   # document
-  document=f"title: {row[1]['article_title']}, content: {convertHTML(row[1]['article_text'])}"
+  document=f"제목: {row[1]['article_title']}, 내용: {convertHTML(row[1]['article_text'])}"
   documents.append(document)
 
   # embedding
@@ -87,18 +91,15 @@ for idx, row in enumerate(csv_data.iterrows()):
   print(f"[debug] ({idx} / {entire_size})")
   
   if idx % 100 == 0 :
-
     # Collection add
     collection.add(
         ids=ids,
-        embeddings=openai_ef(documents),
         metadatas=metadatas,
         documents=documents
     )
 
     ids = []
     metadatas = [] 
-    embeddings = []
     documents = []
 
     print("[debug] data added",end_time.strftime("%Y-%m-%d %H:%M:%S"),getTimeDiffString(prediction_seconds))
@@ -106,22 +107,8 @@ for idx, row in enumerate(csv_data.iterrows()):
 # Collection ADD
 collection.add(
     ids=ids,
-    embeddings=embeddings,
+    documents=documents,
     metadatas=metadatas
 )
 
-
-### TEST CODE
-TARGET_IDX = 3
-print("[debug] Test Query execute")
-print(f"[debug] target idx {TARGET_IDX}")
-
-query_result = collection.query(
-    query_embeddings=embeddings[3],
-    n_results=5
-)
-
-IS_CORRECT = query_result['ids'][0] == TARGET_IDX
-print(query_result)
-print(f"[debug] test result is {IS_CORRECT}")
 print("[debug] Vecter db add complete")
