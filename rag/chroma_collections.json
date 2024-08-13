@@ -1,0 +1,6 @@
+[
+    {
+        "collection_name" : "cnu_post_data",
+        "embedding_func" : "BM-K/KoSimCSE-roberta"
+    }
+]
