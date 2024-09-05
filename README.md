@@ -15,11 +15,6 @@
 ## 시스템 아키텍처
 <img width="591" alt="image" src="https://github.com/user-attachments/assets/c31be880-aed2-4289-8356-1b564fefac74">
 
-- **Frontend**: Vanila JS로 구현됨(repository:)
-- **Backend**: Java/SpringBoot로 구현됨(repository:)
-- **LLM Interface**: LangChain 및 transformers 라이브러리를 사용하여 LLM 연결
-- **Database**: MySQL 이용
-- **Embedding Model**: KoSimCSE-roberta 모델 활용
 
 **시스템 흐름**:
 <img width="596" alt="image" src="https://github.com/user-attachments/assets/70935789-0884-4f8b-ab36-5392fcbef0be">
