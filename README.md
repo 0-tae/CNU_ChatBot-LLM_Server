@@ -1,6 +1,6 @@
 # 충남대학교 챗봇 프로젝트
 
-이 프로젝트는 충남대학교 학생들을 위한 챗봇 서비스를 구현한 내용입니다. LLM(Large Language Model)과 RAG(Retrieval-Augmented Generation) 기술을 Naive하게 활용하여 교내 게시물 데이터를 기반으로 사용자에게 정보를 제공합니다.
+이 프로젝트는 충남대학교 학생들을 위한 챗봇 서비스입니다. LLM(Large Language Model)과 RAG(Retrieval-Augmented Generation) 기술을 Naive하게 활용하여 교내 게시물 데이터를 기반으로 사용자에게 정보를 제공합니다.
 
 추후 학칙 pdf파일, 크롤링 등의 Retrieve 기능 추가로 보다 많고 정확한 정보를 제공할 예정입니다.
 
