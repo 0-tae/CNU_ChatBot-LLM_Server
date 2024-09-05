@@ -76,7 +76,9 @@
 
 다른 구현부에 대해서는 추후 링크 업데이트 예정입니다.
 **Backend**:
+
 **Web Server(Front)**:
+
 **Infra**: 
 
 1. rag/env_set에 환경 설정을 마쳐주세요
