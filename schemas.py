@@ -21,7 +21,9 @@ class HttpErrorResponse(HttpBaseResponse):
     message: str = "unexpected error"
 
 class QueryDTO(BaseModel):
-    query_message: str
-
+    sessionId: str
+    content: str
+   
 class ResponseQueryDTO(BaseModel):
-    ans_message: str
+    sessionId: str
+    content: str

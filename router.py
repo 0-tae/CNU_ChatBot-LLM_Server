@@ -1,23 +1,17 @@
-from fastapi import FastAPI, APIRouter, Request
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi import FastAPI, Request
 from typing import Union
 from schemas import HttpResponse
 from exception.http_exception_handler import handler, HttpErrorResponse
-from llm_objects.llama_object import llm_obejct
+from rag.llama_object import llm_obejct
 from schemas import QueryDTO, ResponseQueryDTO
-from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
-app.add_middleware(    
-    CORSMiddleware,
-    allow_origins=["*"],  # 모든 origin을 허용하려면 ["*"]로 설정합니다.
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
-    allow_headers=["*"],)
+
+prefix = "/llm/api/v1"
 
 @app.post(
-    "/api/v1/llm/query",
+    f"{prefix}/query",
     response_model=Union[HttpResponse, HttpErrorResponse, ResponseQueryDTO],
     response_model_exclude_defaults=True,
     
@@ -34,9 +28,20 @@ async def result_for_query(request:Request, query_dto: QueryDTO):
     #  TODO: Header 확인하여 접근권한을 가진 요청인지 확인하기
 
     # 질의를 통해 LLM에서 결과 얻어오기
-    answer = execute_func_with_exception_handler(llm_obejct.get_post_result,query_dto.query_message)
+    answer = execute_func_with_exception_handler(llm_obejct.old_rag,query_dto.content)
     
-    return ResponseQueryDTO(ans_message=answer)
+    return ResponseQueryDTO(content=answer, sessionId=query_dto.sessionId)
+
+
+@app.post(f"{prefix}//test")
+async def test(request:Request, query_dto: QueryDTO):
+    body = await request.body()
+    headers = request.headers
+    print(body)
+    print(headers)
+
+    return ResponseQueryDTO(ans_message="LLM http test OK")
+
 
 @handler.http_error_handle
 def execute_func_with_exception_handler(func, *args, **kwargs):
