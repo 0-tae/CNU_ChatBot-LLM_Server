@@ -16,7 +16,7 @@
 <img width="591" alt="image" src="https://github.com/user-attachments/assets/c31be880-aed2-4289-8356-1b564fefac74">
 
 
-**시스템 흐름**:
+## 시스템 흐름
 <img width="596" alt="image" src="https://github.com/user-attachments/assets/70935789-0884-4f8b-ab36-5392fcbef0be">
 
 1. 사용자가 질문을 입력하면 웹 서버가 이를 처리하여 서버로 전달합니다.
