@@ -2,7 +2,7 @@
 
 현재 디렉토리에서는 CNU ChatBot에서 RAG(Retrievial-Argumented-Generation) 구현 시, 필요한 데이터를 구성합니다. 다음의 ipynb 파일을 순서대로 실행하여 초기 데이터를 구성합니다.
 
-데이터는 _충남대학교 내 학교/학과 게시물_ 이며 정보화본부의 API, Vector DB(Chroma)에 Embedding하여 저장합니다.
+데이터는 **충남대학교 내 학교/학과 게시물** 이며 정보화본부의 API, Vector DB(Chroma)에 Embedding하여 저장합니다.
 
 ### 1. data_init.ipynb
 
