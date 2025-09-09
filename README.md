@@ -63,37 +63,3 @@
 <img width="499" alt="image" src="https://github.com/user-attachments/assets/54db4ec5-b400-4d85-a359-345e22791bdc">
 
 <img width="446" alt="image" src="https://github.com/user-attachments/assets/bd4b6b24-b6c1-4d93-9cdd-5cc24949f78f">
-
-## 실행 방법
-현재 레포지토리는 LLM Server이며, 이에 대한 실행 방법을 명시합니다.
-
-이외 구현부에 대해서는, 아래에 추후 링크 업데이트 예정입니다.
-
-**Backend**:
-
-**Web Server(Front)**:
-
-**Infra**: 
-
-1. rag/env_set의 README.md를 확인하여 환경 설정을 마쳐주세요
-
-2. 프로젝트를 로컬 환경에 클론합니다.
-
-   ```bash
-   git clone https://github.com/username/CNU-ChatBot.git
-   cd CNU-ChatBot
-   ```
-
-3. 필요한 패키지를 설치합니다.
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. FastAPI 서버를 uvicorn으로 실행합니다.
-
-   ```bash
-   uvicorn router:app --reload
-   ```
-
-5. API_Doc.md를 읽고 LLM Server의 API를 이용하여 모델을 서버에 통합할 수 있습니다.
